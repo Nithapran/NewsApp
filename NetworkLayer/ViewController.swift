@@ -11,12 +11,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         RequestService().createRequest()
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-                        if let dic = NSDictionary(contentsOfFile: path) {
-                            print( dic["BASE_URL"] as? String ?? "")
-                        }
-                    }
         
         
         var person = Person(name: "Nitha", age: "12")

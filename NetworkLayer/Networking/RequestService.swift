@@ -10,7 +10,7 @@ import Foundation
 class RequestService: APIClient {
     func getAllRequests() {
         let request = getBuilder().path(.getAllRequests).method(.get)
-        request.makeRequest() { (data: ResponseModel<[Request]>? ,error) in
+        RequestMiddleware.request(request: request){ (data: ResponseModel<[Request]>?) in
             
         }
     }
@@ -25,7 +25,7 @@ class RequestService: APIClient {
                     "phoneNumber": "6478047139"
             ]
         )
-        request.makeRequest() { (data: ResponseModel<Request>? ,error) in
+        RequestMiddleware.request(request: request){ (data: ResponseModel<Request>?) in
             
         }
     }

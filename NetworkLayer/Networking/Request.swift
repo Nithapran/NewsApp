@@ -7,12 +7,20 @@
 
 import Foundation
 
-enum NetworkError: Error {
+enum NetworkRequestError: Error {
     case noInternet
     case apiFailure
     case invalidResponse
     case decodingError
+    case JSONSerializationError
+    case badRequest
+    case unauthorized
+    case forbidden
+    case notFound
+    case serverError
+    case unknownError
 }
+
 
 enum HTTPMethod: String {
     case get     = "GET"
@@ -38,6 +46,11 @@ enum AuthHeader {
     
 }
 
+struct NetWorkConfiguration {
+    var baseURL: String
+    var auth: () -> String?
+}
+
 public typealias Parameters = [String : Any]
 public typealias HTTPHeaderType = [String: String?]
 
@@ -46,16 +59,17 @@ protocol APIRequest {
     var path: APIPath {get}
     var method: HTTPMethod {get}
     var parameters: Parameters? {get}
+    
     func method(_ method: HTTPMethod) -> APIRequest
     func path(_ path: APIPath) -> APIRequest
     func parameters(_ parameters: Parameters) -> APIRequest
-   
     func appendHeader(key: String, value: String?) -> APIRequest
-    func makeRequest<T: Codable>(onCompletion: @escaping(T?, NetworkError?) -> ())
+    
+    func makeRequest<T: Codable>(onCompletion: @escaping(T?, NetworkRequestError?) -> ())
 }
 
 extension APIRequest {
-    func toUrlRequest(data: APIRequest) -> URLRequest {
+    func toUrlRequest(data: APIRequest) throws -> URLRequest  {
         var url = URL(string: data.netWorkConfiguration.baseURL)!
         url.appendPathComponent(data.path.toString)
         var request = URLRequest(url: url)
@@ -67,12 +81,28 @@ extension APIRequest {
                 request.httpBody = httpBody
                 
             } catch {
-                
+                throw NetworkRequestError.JSONSerializationError
             }
+        }
+        
+        if path.requireAuthentication {
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(data.netWorkConfiguration.auth() ?? "")", forHTTPHeaderField: "Authorization")
         }
 
         return request
     }
+    
+    func httpError(_ statusCode: Int) -> NetworkRequestError {
+            switch statusCode {
+            case 400: return .badRequest
+            case 401: return .unauthorized
+            case 403: return .forbidden
+            case 404: return .notFound
+            case 500: return .serverError
+            default: return .unknownError
+            }
+        }
 }
 
 
@@ -92,20 +122,6 @@ class RequestBuilder: APIRequest {
         
     }
     
-//    init(_ baseURL: String,_ path: APIPath) {
-//        self.path = path
-//        var url = URL(string: baseURL)!
-//        url.appendPathComponent(path.toString)
-//        request = URLRequest(url: url)
-//        //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        if path.requireAuthentication {
-//            request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjhhOTJkZDcwN2U5NzYwYjk0YjZhNWUiLCJpYXQiOjE2NTMyNDg3MzMsImV4cCI6MTY4NDM1MjczM30.h8Z-nGVr8166YTYOkwrC1p9WEmeFG5o-pEIpln9MmAQ", forHTTPHeaderField: "Authorization")
-//        }
-//
-//
-//
-//    }
-    
     func method(_ method: HTTPMethod) -> APIRequest {
         self.method = method
         return self
@@ -119,10 +135,6 @@ class RequestBuilder: APIRequest {
     
     
     func parameters(_ parameters: Parameters) -> APIRequest {
-//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
-//                return self
-//            }
-//            request.httpBody = httpBody
         self.parameters = parameters
         return self
     }
@@ -133,16 +145,35 @@ class RequestBuilder: APIRequest {
         return self
     }
     
-    func makeRequest<T: Codable>(onCompletion: @escaping(T?, NetworkError?) -> ()) {
-        URLSession.shared.dataTask(with: self.toUrlRequest(data: self)) { data, response, error in
-            guard error == nil, let responseData = data else { onCompletion(nil, NetworkError.apiFailure) ; return }
-            do {
-                let responseModel =  try JSONDecoder().decode(T.self,from: responseData)
-                onCompletion(responseModel, nil)
-            } catch {
-                print(error)
-            }
+    func makeRequest<T: Codable>(onCompletion: @escaping(T?, NetworkRequestError?) -> ()) {
+        
+        do {
+            let request =  try self.toUrlRequest(data: self)
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil, let responseData = data else {
+                    onCompletion(nil, NetworkRequestError.apiFailure)
+                    return
+                    
+                }
+                
+                if let response = response as? HTTPURLResponse,
+                                  !(200...299).contains(response.statusCode) {
+                    onCompletion(nil, self.httpError(response.statusCode))
+                               }
+                do {
+                    let responseModel =  try JSONDecoder().decode(T.self,from: responseData)
+                    onCompletion(responseModel, nil)
+                } catch {
+                    print(error)
+                }
+                
+            }.resume()
+        } catch {
+            onCompletion(nil, error as? NetworkRequestError)
+        }
             
-        }.resume()
+        
+        
+        
     }
 }

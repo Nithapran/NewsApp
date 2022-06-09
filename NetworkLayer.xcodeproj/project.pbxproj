@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		A00A561F284ED987004A36EC /* APIPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00A561E284ED987004A36EC /* APIPath.swift */; };
 		A00A5621284EEFF6004A36EC /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00A5620284EEFF6004A36EC /* RequestService.swift */; };
-		A00A56232850141E004A36EC /* Practice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00A56222850141E004A36EC /* Practice.swift */; };
 		A00A562528519D45004A36EC /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00A562428519D45004A36EC /* APIClient.swift */; };
+		A00A562828523DD3004A36EC /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A00A562728523DD3004A36EC /* KeychainSwift */; };
+		A00A562A28523E09004A36EC /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00A562928523E09004A36EC /* App.swift */; };
+		A00A562C28523EEF004A36EC /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00A562B28523EEF004A36EC /* AuthStore.swift */; };
+		A00A562E28524BB5004A36EC /* RequestMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00A562D28524BB5004A36EC /* RequestMiddleware.swift */; };
 		A0D68641284D37B600D673CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D68640284D37B600D673CF /* AppDelegate.swift */; };
 		A0D68643284D37B600D673CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D68642284D37B600D673CF /* SceneDelegate.swift */; };
 		A0D68645284D37B600D673CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D68644284D37B600D673CF /* ViewController.swift */; };
@@ -44,8 +47,10 @@
 /* Begin PBXFileReference section */
 		A00A561E284ED987004A36EC /* APIPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPath.swift; sourceTree = "<group>"; };
 		A00A5620284EEFF6004A36EC /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
-		A00A56222850141E004A36EC /* Practice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Practice.swift; sourceTree = "<group>"; };
 		A00A562428519D45004A36EC /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		A00A562928523E09004A36EC /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		A00A562B28523EEF004A36EC /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
+		A00A562D28524BB5004A36EC /* RequestMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMiddleware.swift; sourceTree = "<group>"; };
 		A0D6863D284D37B600D673CF /* NetworkLayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkLayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D68640284D37B600D673CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0D68642284D37B600D673CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A00A562828523DD3004A36EC /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +96,6 @@
 		A0D68634284D37B600D673CF = {
 			isa = PBXGroup;
 			children = (
-				A00A56222850141E004A36EC /* Practice.swift */,
 				A0D6863F284D37B600D673CF /* NetworkLayer */,
 				A0D68656284D37B800D673CF /* NetworkLayerTests */,
 				A0D68660284D37B800D673CF /* NetworkLayerUITests */,
@@ -119,6 +124,8 @@
 				A0D68649284D37B800D673CF /* Assets.xcassets */,
 				A0D6864B284D37B800D673CF /* LaunchScreen.storyboard */,
 				A0D6864E284D37B800D673CF /* Info.plist */,
+				A00A562928523E09004A36EC /* App.swift */,
+				A00A562B28523EEF004A36EC /* AuthStore.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -144,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				A0D68671284D384500D673CF /* Request.swift */,
+				A00A562D28524BB5004A36EC /* RequestMiddleware.swift */,
 				A00A561E284ED987004A36EC /* APIPath.swift */,
 				A00A5620284EEFF6004A36EC /* RequestService.swift */,
 				A00A562428519D45004A36EC /* APIClient.swift */,
@@ -167,6 +175,9 @@
 			dependencies = (
 			);
 			name = NetworkLayer;
+			packageProductDependencies = (
+				A00A562728523DD3004A36EC /* KeychainSwift */,
+			);
 			productName = NetworkLayer;
 			productReference = A0D6863D284D37B600D673CF /* NetworkLayer.app */;
 			productType = "com.apple.product-type.application";
@@ -239,6 +250,9 @@
 				Base,
 			);
 			mainGroup = A0D68634284D37B600D673CF;
+			packageReferences = (
+				A00A562628523DD3004A36EC /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = A0D6863E284D37B600D673CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -284,11 +298,13 @@
 			files = (
 				A0D68645284D37B600D673CF /* ViewController.swift in Sources */,
 				A00A5621284EEFF6004A36EC /* RequestService.swift in Sources */,
-				A00A56232850141E004A36EC /* Practice.swift in Sources */,
 				A00A562528519D45004A36EC /* APIClient.swift in Sources */,
+				A00A562E28524BB5004A36EC /* RequestMiddleware.swift in Sources */,
 				A00A561F284ED987004A36EC /* APIPath.swift in Sources */,
 				A0D68672284D384500D673CF /* Request.swift in Sources */,
+				A00A562A28523E09004A36EC /* App.swift in Sources */,
 				A0D68641284D37B600D673CF /* AppDelegate.swift in Sources */,
+				A00A562C28523EEF004A36EC /* AuthStore.swift in Sources */,
 				A0D68643284D37B600D673CF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,6 +650,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A00A562628523DD3004A36EC /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A00A562728523DD3004A36EC /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A00A562628523DD3004A36EC /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A0D68635284D37B600D673CF /* Project object */;
 }

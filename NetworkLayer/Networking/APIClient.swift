@@ -7,16 +7,18 @@
 
 import Foundation
 
-struct NetWorkConfiguration {
-    var baseURL: String
-    var auth: () -> String?
-}
 
 class APIClient {
     var netWorkConfiguration: NetWorkConfiguration
     
     init() {
-        self.netWorkConfiguration = NetWorkConfiguration(baseURL: "http://127.0.0.1:3001/", auth: {return ""})
+        var baseURL = ""
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+                        if let dic = NSDictionary(contentsOfFile: path) {
+                            baseURL = dic["BASE_URL"] as! String
+                        }
+                    }
+        self.netWorkConfiguration = NetWorkConfiguration(baseURL: baseURL, auth: {return App.storage.authStore.getToken()})
         
     }
     
