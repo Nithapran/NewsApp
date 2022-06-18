@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A0D6863C284D37B600D673CF"
-               BuildableName = "NetworkLayer.app"
-               BlueprintName = "NetworkLayer"
-               ReferencedContainer = "container:NetworkLayer.xcodeproj">
+               BuildableName = "News.app"
+               BlueprintName = "News"
+               ReferencedContainer = "container:News.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A0D6863C284D37B600D673CF"
-            BuildableName = "NetworkLayer.app"
-            BlueprintName = "NetworkLayer"
-            ReferencedContainer = "container:NetworkLayer.xcodeproj">
+            BuildableName = "News.app"
+            BlueprintName = "News"
+            ReferencedContainer = "container:News.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A0D6863C284D37B600D673CF"
-            BuildableName = "NetworkLayer.app"
-            BlueprintName = "NetworkLayer"
-            ReferencedContainer = "container:NetworkLayer.xcodeproj">
+            BuildableName = "News.app"
+            BlueprintName = "News"
+            ReferencedContainer = "container:News.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

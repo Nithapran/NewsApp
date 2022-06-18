@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FilterViewController" customModule="NetworkLayer" customModuleProvider="target">
+            <connections>
+                <outlet property="countriesStackVIew" destination="wt6-SZ-Wi4" id="5iF-Hx-8HA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CN4-4h-GWV">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="wt6-SZ-Wi4">
+                            <rect key="frame" x="15" y="50.5" width="290" height="29.5"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="wt6-SZ-Wi4" firstAttribute="leading" secondItem="CN4-4h-GWV" secondAttribute="leading" constant="15" id="g7n-4s-yuJ"/>
+                        <constraint firstAttribute="trailing" secondItem="wt6-SZ-Wi4" secondAttribute="trailing" constant="15" id="zT8-nL-uhI"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35d-EK-CNX">
+                    <rect key="frame" x="15" y="15" width="127" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="35d-EK-CNX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="IPm-pv-g7T"/>
+                <constraint firstItem="CN4-4h-GWV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Koi-CO-le1"/>
+                <constraint firstItem="CN4-4h-GWV" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Uvb-3g-Pqb"/>
+                <constraint firstItem="35d-EK-CNX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="h5h-8z-eZX"/>
+                <constraint firstItem="wt6-SZ-Wi4" firstAttribute="top" secondItem="35d-EK-CNX" secondAttribute="bottom" constant="15" id="oM8-5F-G2P"/>
+                <constraint firstItem="CN4-4h-GWV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="rcQ-Iv-hXT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="CN4-4h-GWV" secondAttribute="bottom" id="yEt-40-2GV"/>
+            </constraints>
+            <point key="canvasLocation" x="131.25" y="92.5"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

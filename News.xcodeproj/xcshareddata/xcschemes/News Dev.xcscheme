@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A0D6863C284D37B600D673CF"
-               BuildableName = "NetworkLayer.app"
-               BlueprintName = "NetworkLayer"
-               ReferencedContainer = "container:NetworkLayer.xcodeproj">
+               BuildableName = "News.app"
+               BlueprintName = "News"
+               ReferencedContainer = "container:News.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "A0D68652284D37B800D673CF"
                BuildableName = "NetworkLayerTests.xctest"
                BlueprintName = "NetworkLayerTests"
-               ReferencedContainer = "container:NetworkLayer.xcodeproj">
+               ReferencedContainer = "container:News.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "A0D6865C284D37B800D673CF"
                BuildableName = "NetworkLayerUITests.xctest"
                BlueprintName = "NetworkLayerUITests"
-               ReferencedContainer = "container:NetworkLayer.xcodeproj">
+               ReferencedContainer = "container:News.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A0D6863C284D37B600D673CF"
-            BuildableName = "NetworkLayer.app"
-            BlueprintName = "NetworkLayer"
-            ReferencedContainer = "container:NetworkLayer.xcodeproj">
+            BuildableName = "News.app"
+            BlueprintName = "News"
+            ReferencedContainer = "container:News.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A0D6863C284D37B600D673CF"
-            BuildableName = "NetworkLayer.app"
-            BlueprintName = "NetworkLayer"
-            ReferencedContainer = "container:NetworkLayer.xcodeproj">
+            BuildableName = "News.app"
+            BlueprintName = "News"
+            ReferencedContainer = "container:News.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

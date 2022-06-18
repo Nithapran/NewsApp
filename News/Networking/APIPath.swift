@@ -8,14 +8,12 @@
 import Foundation
 
 public enum APIPath: Equatable {
-    case getAllRequests
+    case topHeadLines
     case authRefresh
     case empty
     
     var requireAuthentication: Bool {
         switch self {
-        case .getAllRequests:
-            return true
         default:
             return false
         }
@@ -23,7 +21,8 @@ public enum APIPath: Equatable {
     
     var toString: String {
         switch self {
-        case .getAllRequests: return "api/request/requests/"
+        case .topHeadLines:
+            return "top-headlines"
         case .authRefresh: return "order-traveler-api/api/jwt/refresh_token"
         case .empty: return ""
         }

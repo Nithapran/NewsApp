@@ -59,10 +59,12 @@ protocol APIRequest {
     var path: APIPath {get}
     var method: HTTPMethod {get}
     var parameters: Parameters? {get}
+    var urlQueryParameters: Parameters? {get}
     
     func method(_ method: HTTPMethod) -> APIRequest
     func path(_ path: APIPath) -> APIRequest
     func parameters(_ parameters: Parameters) -> APIRequest
+    func urlQueryParameters(_ parameters: Parameters) -> APIRequest
     func appendHeader(key: String, value: String?) -> APIRequest
     
     func makeRequest<T: Codable>(onCompletion: @escaping(T?, NetworkRequestError?) -> ())
@@ -72,7 +74,31 @@ extension APIRequest {
     func toUrlRequest(data: APIRequest) throws -> URLRequest  {
         var url = URL(string: data.netWorkConfiguration.baseURL)!
         url.appendPathComponent(data.path.toString)
+        
+        
+        
+        
+        
+        if let parameters = data.urlQueryParameters {
+            do {
+                var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
+                var queryIems: [URLQueryItem] = []
+                
+                for param in parameters {
+                    queryIems.append(URLQueryItem(name: param.key, value: param.value as? String))
+                }
+                
+                urlComponents?.queryItems = queryIems
+                url = (urlComponents?.url)!
+            } catch {
+                throw NetworkRequestError.JSONSerializationError
+            }
+        }
+
+        
+        
         var request = URLRequest(url: url)
+        
         request.httpMethod = data.method.rawValue
 
         if let parameters = data.parameters {
@@ -110,6 +136,8 @@ class RequestBuilder: APIRequest {
     
     var parameters: Parameters?
     
+    var urlQueryParameters: Parameters?
+    
     var netWorkConfiguration: NetWorkConfiguration
     
     var path: APIPath = .empty
@@ -139,7 +167,10 @@ class RequestBuilder: APIRequest {
         return self
     }
     
-    
+    func urlQueryParameters(_ parameters: Parameters) -> APIRequest {
+        self.urlQueryParameters = parameters
+        return self
+    }
     
     func appendHeader(key: String, value: String?) -> APIRequest {
         return self
